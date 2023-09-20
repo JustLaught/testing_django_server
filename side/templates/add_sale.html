@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block navigation %}
+    {% include 'nav.html' %}
+{% endblock navigation %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="cash">Cash:</label>
+        <input type="number" name="cash" id="cash"><br>
+        <label for="date">Date:</label>
+        <input type="date" name="date" id="date"><br>
+        <select name="client">
+            {% for client in clients %}
+                <option value="{{client.id}}">{{client.name}} {{client.lastname}}</option>
+            {% endfor %}
+        </select><br>
+        <select name="products" multiple>
+            {% for product in product %}
+                <option value="{{product.id}}">{{product.name}}</option>
+            {% endfor %}
+        </select><br>
+        <select name="seller">
+            {% for salesman in salesman %}
+                <option value="{{salesman.id}}">{{salesman.name}} {{salesman.lastname}}</option>
+            {% endfor %}
+       </select><br>
+       <input type="submit" value='Consume'>
+    </form>
+{% endblock content %}

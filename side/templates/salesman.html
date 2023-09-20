@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block navigation %}
+    {% include 'nav.html' %}
+{% endblock navigation %}
+
+{% block content %}
+    {% for salesman in data %}
+        <p><a href="{% url "show_seller" salesman.id %}">{{salesman}}</a></p>
+    {% endfor %}
+{% endblock content %}

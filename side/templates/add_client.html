@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block navigation %}
+    {% include 'nav.html' %}
+{% endblock navigation %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="user_name">Name:</label>
+        <input type="text" name="user_name" id="user_name">
+        <label for="user_lastname">LastName:</label>
+        <input type="text" name="user_lastname" id="user_lastname">
+        <label for="user_phone">Phone:</label>
+        <input type="text" name="user_phone" id="user_phone">
+        <label for="user_email">Email:</label>
+        <input type="Email" name="user_email" id="user_email">
+        <input type="submit" value="Add">
+    </form>
+{% endblock content %}

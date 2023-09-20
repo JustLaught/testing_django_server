@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block navigation %}
+    {% include 'nav.html' %}
+{% endblock navigation %}
+
+{% block content %}
+    {% for client in data_from_client %}
+        {% comment %} <p><a href="{% url 'edit_clients' client.id %}">{{client}}</a></p> {% endcomment %}
+        <p><a href="{% url 'show_client' client.id %}">{{client}}</a></p>
+    {% endfor %}
+{% endblock content %}
