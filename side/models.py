@@ -32,6 +32,7 @@ class Product(models.Model):
     def __str__(self):
         return f'{self.name} | {self.description}'
 
+
 class Sales(models.Model):
     client = models.ForeignKey("Client", on_delete=models.RESTRICT, related_name='sales')
     salesman = models.ForeignKey("Salesman", on_delete=models.RESTRICT, related_name='sales')
@@ -39,5 +40,12 @@ class Sales(models.Model):
     sales_date = models.DateTimeField()
     cash_amount = models.FloatField()
 
+    def get_products(self):
+        lst = []
+        for i in self.product.all():           
+            lst.append(f"{i.name} \\ {i.description}")
+        
+        return " | ".join(lst)
+
     def __str__(self):
-        return f'{self.client} | {self.salesman} | {self.product} | {self.product} | {self.sales_date} | {self.cash_amount}'
+        return f'{self.client} | {self.salesman} | {self.get_products()} | {self.sales_date} | {self.cash_amount}'

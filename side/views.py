@@ -65,3 +65,36 @@ def add_sale(request):
         'salesman': Salesman.objects.all()
     }
     return render(request, 'add_sale.html', context)
+
+def show_query(request):
+    product = Product.objects.all()
+    salesman = Salesman.objects.all()
+    if request.method == 'POST':
+        choice = request.POST.get('choice')
+
+        if choice == 'ShowAllClientsSalesman':
+            clients = Sales.objects.filter(salesman=request.POST['Salesman'])
+            return render(request, 'sales.html', {'data': clients})
+        
+        elif choice == 'ShowAllSalesInDate':
+            sale = Sales.objects.filter(sales_date=request.POST['SalesDate'])
+            return render(request, 'sales.html', {'data': sale})
+        
+        elif choice == 'ProductSellers':
+            seler = Sales.objects.filter(product=request.POST['ProductSalesman'])
+            for s in seler:
+                print(s.product.get(id=request.POST['ProductSalesman']))
+            return render(request, 'sales.html', {'data': seler})
+        
+        elif choice == 'ProductCustomers':
+            clients = Sales.objects.filter(product=request.POST['ProductCustomer'])
+            return render(request, 'sales.html', {'data': clients})
+
+        elif choice == 'SumDate':
+            day = Sales.objects.filter(sales_date=request.POST['SalesDate'])
+            sum = 0
+            for i in day:
+                sum += i.cash_amount
+            return render(request, 'sales.html', {'data': sum})
+        
+    return render(request, 'show_query.html', {'product': product, 'salesman': salesman})

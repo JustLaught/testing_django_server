@@ -13,4 +13,5 @@ urlpatterns = [
     path('show_seller/<int:id>', views.show_seller, name='show_seller'),
     path('add_client/', views.add_client, name='add_client'),
     path('add_sale/', views.add_sale, name='add_sale'),
+    path('shitoption/', views.show_query, name='show_query'),
 ]
